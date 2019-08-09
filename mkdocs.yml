@@ -23,7 +23,7 @@ site_name: Ledgerium Blockchain
 site_description: Open public implementation of Quorum Blockchain supporting public and privacy transactions.
 site_author: The Blockledger Pty Ltd.
 site_url: https://docs.ledgerium.io
-copyright: 'Copyright &copy; 2019 The BlockLedger Pty Ltd'
+copyright: "Copyright &copy; 2019 The BlockLedger Pty Ltd"
 
 # Repository
 repo_name: ledgerium-io/ledgeriumdocs
@@ -34,7 +34,17 @@ nav:
   - Introduction:
       - Ledgerium Blockchain: ledgerium/introduction/ledgerium.md
       - Ledgerium Foundation: ledgerium/introduction/the_ledgerium_foundation.md
-  
+      - Architecture Overview - TBC
+      - What is XLG: ledgerium/ledgeriumprotocol/xlg.md
+      - Ledgerium Setup:
+          - Getting Started: ledgerium/ledgeriumbox/gettingstarted.md
+          - Test Network: ledgerium/ledgeriumsetup/test_networks.md
+          - Setup Masternode: ledgerium/ledgeriumsetup/ledgerium_masternode.md
+          - Governance: ledgerium/ledgeriumsetup/ledgerium_governance.md
+          - Peer permissioning: ledgerium/ledgeriumsetup/peer_permissioning_governance.md
+          - XLG Reward: ledgerium/ledgeriumsetup/xlg_reward.md
+          - Faucet: ledgerium/ledgerium_faucet.md
+
   - Ledgerium Protocol:
       - Ledgerium Core: ledgerium/ledgeriumprotocol/ledgeriumcore.md
       - Virtual Machine: ledgerium/ledgeriumprotocol/virtual_machine.md
@@ -64,26 +74,17 @@ nav:
                   - Monitoring: ledgerium/ledgeriumprotocol/quorum/tessera/Usage/Monitoring.md
       - IBFT Consensus: ledgerium/ledgeriumprotocol/ibft_consensus.md
       - Network Permissioning: ledgerium/ledgeriumprotocol/network_permissioning.md
-      - What is XLG: ledgerium/ledgeriumprotocol/xlg.md
-      - Smart Contract: ledgerium/ledgeriumprotocol/smart_contracts.md
-      
-  - Ledgerium Setup:
-      - Test Network: ledgerium/ledgeriumsetup/test_networks.md
-      - Setup Masternode: ledgerium/ledgeriumsetup/ledgerium_masternode.md
-      - Governance: ledgerium/ledgeriumsetup/ledgerium_governance.md
-      - Peer permissioning: ledgerium/ledgeriumsetup/peer_permissioning_governance.md
-      - XLG Reward: ledgerium/ledgeriumsetup/xlg_reward.md
-      - Faucet: ledgerium/ledgerium_faucet.md
-      
+
   - Ledgerium Applications:
       - Ledgerium BlockExplorer: ledgerium/ledgeriumapplications/ledgerium_block_explorer.md
       - Ledgerium Wallet: ledgerium/ledgeriumapplications/ledgerium_wallet.md
       - Ledgerium Tools: ledgerium/ledgeriumapplications/ledgerium_tools.md
 
-  - Smart Contracts:
+  - Understanding Smart Contracts:
+      - What is a Smart Contract: ledgerium/ledgeriumprotocol/smart_contracts.md
       - Accessing Contracts: ledgerium/smartcontracts/accessing_contracts.md
       - Deploying Contracts: ledgerium/smartcontracts/accessing_contracts.md
-  
+
   - Ledgerium DApp Development:
       - DApp: ledgerium/ledgeriumdappdevelopment/decentralised_app_platform.md
       - Setup DApp Environment: ledgerium/ledgeriumdappdevelopment/setupenvironment.md
@@ -91,35 +92,26 @@ nav:
       - Solidity: ledgerium/ledgeriumdappdevelopment/solidity.md
       - Ledgerium API: ledgerium/ledgeriumdappdevelopment/json-rpc.md
       - Best Practices: ledgerium/ledgeriumdappdevelopment/bestpractices.md
-  
-  - Ledgerium Wallet:
-      - Using Ledgerium Wallet: ledgerium/LedgeriumWallet/using_ledgerium_wallet.md
-      
-  - Ledgerium Box:
-      - Getting Started: ledgerium/ledgeriumbox/gettingstarted.md
-      - Smart Contract Deployment: ledgerium/ledgeriumbox/deploying_smart_contracts.md
 
-  - Ledgerium Gas Station: 
-    - Ledgerium Gas Station: ledgerium/Ledgeriumgasstation/ledgerium_gas_station.md
-  
+  - Ledgerium Gas Station:
+      - Ledgerium Gas Station: ledgerium/Ledgeriumgasstation/ledgerium_gas_station.md (Missing relevant Gas info)
+
   - Glossary: ledgerium/glossary.md
   - Community: ledgerium/community.md
   - Latest Release: ledgerium/release.md
-  - Roadmap: ledgerium/roadmap.md
-  #- References: ledgerium/References.md
 
 theme:
-  name: 'material'
-  custom_dir: 'material'
+  name: "material"
+  custom_dir: "material"
   font:
-      text: 'Roboto'
-      code: 'Roboto Mono'
-  language: 'en'
-  logo: 'images/logo.png'
-  favicon: 'images/logo-48x48.png'
+    text: "Roboto"
+    code: "Roboto Mono"
+  language: "en"
+  logo: "images/logo.png"
+  favicon: "images/logo-48x48.png"
 
 extra_css:
-    - 'theme/assets/stylesheets/extra.css'
+  - "theme/assets/stylesheets/extra.css"
 
 # Customization
 extra:

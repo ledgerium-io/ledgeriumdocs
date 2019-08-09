@@ -1,65 +1,68 @@
 # **Accounts**
 
-Accounts play a central role in Ledgerium. There are two types of accounts: *externally owned accounts* (EOAs) and *contract accounts*. Here we focus on externally owned accounts, which will be referred to simply as ***accounts***. Contract accounts will be referred to as *contracts* and are discussed in detail in Contracts \<Contracts\. This generic notion of account subsuming both externally owned accounts and contracts is justified in that these entities are so called *state objects*. These entities have a state: accounts have
-balance and contracts have both balance and contract storage. The state of all accounts is the state of the Ledgerium network which is updated with every block and which the network really needs to reach a consensus about. Accounts are essential for users to interact with the Ledgerium blockchain via transactions.
+Accounts play a central role in Ledgerium Blockchain. They are essential for users to interact with the Ledgerium blockchain via transactions.
 
-If we restrict Ledgerium to only externally owned accounts and allow only transactions between them, we arrive at an "altcoin" system that is less powerful than bitcoin itself and can only be used to transfer XLG.
+Accounts represent identities of external agents (e.g., human role/porfolio, mining computer or computerized agents). Accounts use public key cryptography to sign transactions so that the EVM (Ethereum Virtual Machine) can securely validate the identity of a transaction sender.
 
-Accounts represent identities of external agents (e.g., human personas, mining nodes or automated agents). Accounts use public key cryptography to sign transactions so that the EVM can securely validate the identity of a transaction sender.
+There are two types of accounts: _**externally owned accounts**_(EOAs)\* and _**contract accounts**_. Here we focus on externally owned accounts, which will be referred simply as _accounts_ and contract accounts will be referred to as _contracts_.
 
-## **EOA vs Contract accounts**
-There are two types of accounts in Ledgerium
--   Externally Owned Accounts
--   Contracts Accounts
+Both the entities have a state: accounts have balance and contracts have both balance and contract storage. The state of all accounts is reflected as the state of the Ledgerium network which gets updated with every block, post the consensus of blockchain.
+
+If we restrict Ledgerium to only externally owned accounts and allow the transactions between them, we arrive at an "altcoin" system that is less powerful than bitcoin itself and can only be used to transfer XLG.
 
 ### **Externally owned accounts (EOAs)**
-An externally controlled account
--   has an XLG balance,
--   can send transactions (XLG transfer or trigger contract code),
--   is controlled by private keys,
--   has no associated code.
+
+- has a XLG balance
+- can send transactions (XLG transfer or trigger contract code)
+- is controlled by private keys
+- has no associated code
 
 ### **Contract accounts**
-A contract
--   has an XLG balance,
--   has associated code,
--   code execution is triggered by transactions or messages (calls) received from other contracts.
--   when executed
-    -   perform operations of arbitrary complexity (Turing completeness)
-    -   manipulate its own persistent storage, i.e., can have its own permanent state
-    -   can call other contracts
 
-All action on the Ledgerium blockchain is set in motion by transactions fired from externally owned accounts. Every time a contract account receives a transaction, its code is executed as instructed by the input parameters sent as part of the transaction. The contract code is executed by the Ethereum Virtual Machine on each node participating in the network as part of their verification of new blocks.
+- has a XLG balance
+- has associated code
+- code execution is triggered by transactions or messages (calls) received from other contracts
+- during execution:
+  - perform operations of arbitrary complexity
+  - manipulate its own persistent storage, i.e., can have its own permanent state
+  - can contact other contracts
 
-This execution needs to be completely deterministic, its only context is the position of the block on the blockchain and all data available. The blocks on the blockchain represent units of time, the blockchain itself is a temporal dimension and represents the entire history of states at the discrete time points designated by the blocks on the chain.
+All action on the Ledgerium blockchain is set in motion by transactions fired from externally owned accounts. Every time a contract receives a transaction, its code is executed as instructed by the input parameters sent as part of the transaction. The contract code is executed by the Ethereum Virtual Machine on each participating node in the network as per validation process of new blocks.
 
-All XLG balances and values are denominated in units of wei: 1 XLG is 1e18 wei.
+This execution needs to be completely deterministic, its only context is the position of the block on the blockchain and all data available. The blocks on the blockchain represent units of time, the blockchain itself is a temporal dimension and represents the entire history of states at the discrete time points designated by the blocks on the chain. [^3]
 
-!!! note  
-"Contracts" in Ledgerium should not be seen as something that should be "fulfilled" or "complied with"; rather, they are more like "autonomous agents" that live inside of the Ledgerium execution environment, always executing a specific piece of code when "poked" by a message or transaction, and having direct control over their own XLG balance and their own key/value store to store their permanent state.
+[^3]: [Deterministic Wikipedia](https://en.wikipedia.org/wiki/Deterministic_system "Deterministic Wikipedia")
 
-## **Keyfiles**
-Every account is defined by a pair of keys, a private key and public key. Accounts are indexed by their *address* which is derived from the public key by taking the last 20 bytes. Every private key/address pair is encoded in a *keyfile*. Keyfiles are JSON text files which you can open and view in any text editor. The critical component of the keyfile, your account’s private key, is always encrypted, and it is encrypted with the password you enter when you create the account.
+All XLG balances and values are denominated in units of wei `1 XLG is 1e18 wei`.
+
+> **Please note**  
+> "Contracts" in Ledgerium should not be seen as mandatory, rather, they are more like "autonomous agents" that are part of Ledgerium execution environment. Contracts are always executing a specific piece of code when "poked" by a message or transaction and have direct control over their own XLG balance and key/value store to maintain their permanent state.
+
+## **Key Files**
+
+Every account is accessed by its credentials: private key and public key. Accounts are indexed as per their _address_ derived from the public key made-up of the last 20 bytes. Every private key/address pair is encoded in a _keyfile_.
+
+Keyfiles are JSON text files which can be viewed in any text editor. The critical component of the keyfile, account’s private key, is always encrypted, and it is encrypted with the password you enter when you create the account.
 
 Keyfiles are found in the `keystore` subdirectory of your Ledgerium node’s data directory. Make sure you backup your keyfiles regularly!
 See the section backup-and-restore-accounts for more information.
 
 Creating a key is tantamount to creating an account.
 
--   You don't need to tell anybody else you're doing it
--   You don't need to synchronize with the blockchain
--   You don't need to run a client
--   You don't even need to be connected to the internet
+- You don't need to tell anybody else you're doing it
+- You don't need to synchronize with the blockchain
+- You don't need to run a client
+- You don't even need to be connected to the internet
 
 Of course your new account will not contain any Ether. But it'll be yours and you can be certain that without your key and your password, nobody else can ever access it.
 
 It is safe to transfer the entire directory or any individual keyfile between Ledgerium nodes.
 
 !!! warning
-    Note that in case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
+Note that in case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
 
 !!! warning
-    Remember your password. 
+Remember your password.
 
 If you lose the password you use to encrypt your account, you will not be able to access that account.
 Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
@@ -98,6 +101,7 @@ COMMANDS:
 ```
 
 You can get info about subcommands by `geth account <command> --help`.
+
 ```
 > geth account list --help
 list [command options] [arguments...]
@@ -112,9 +116,10 @@ OPTIONS:
 Accounts can also be managed via the [Javascript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
 ## Examples
+
 ### Interactive use
 
-#### creating an account 
+#### creating an account
 
 ```
 > geth account new
@@ -158,7 +163,7 @@ Repeat Passphrase:
 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
 ```
 
-### Non-interactive use 
+### Non-interactive use
 
 You supply a plaintext password file as argument to the `--password` flag. The data in the
 file consists of the raw characters of the password, followed by a single newline.
@@ -167,7 +172,7 @@ file consists of the raw characters of the password, followed by a single newlin
 but you can always use shell trickery to get round this restriction.
 
 ```
-> geth account new --password /path/to/password 
+> geth account new --password /path/to/password
 
 > geth account import  --datadir /someOtherEthDataDir --password /path/to/anotherpassword ./key.prv
 ```
@@ -203,7 +208,7 @@ your account in the future.
 For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
-geth account new --password <passwordfile> 
+geth account new --password <passwordfile>
 ```
 
 Note, this is meant to be used for testing only, it is a bad idea to save your
@@ -243,7 +248,7 @@ order or doublecheck and update the indexes used in your scripts.
 is not readable or even listable for anyone but you. You achieve this with:
 
 ```
-touch /path/to/password 
+touch /path/to/password
 chmod 700 /path/to/password
 cat > /path/to/password
 >I type my pass here^D
@@ -291,18 +296,20 @@ Account #0: {5afdd78bdacb56ab1dad28741ea2a0e47fe41331} keystore:///tmp/mykeystor
 Account #1: {9acb9ff906641a434803efb474c96a837756287f} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-52.180688336Z--9acb9ff906641a434803efb474c96a837756287f
 ```
 
-to list your accounts in order of creation. 
+to list your accounts in order of creation.
 
 **Note**:
-This order can change if you copy keyfiles from other nodes, so make sure you either do not rely on indexes or make sure if you copy keys you check and update your account indexes in your scripts. 
+This order can change if you copy keyfiles from other nodes, so make sure you either do not rely on indexes or make sure if you copy keys you check and update your account indexes in your scripts.
 
 When using the console:
+
 ```
 > eth.accounts
 ["0x5afdd78bdacb56ab1dad28741ea2a0e47fe41331", "0x9acb9ff906641a434803efb474c96a837756287f"]
 ```
 
 or via RPC:
+
 ```
 # Request
 > curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1} http://127.0.0.1:8545'
@@ -318,14 +325,15 @@ or via RPC:
 If you want to use an account non-interactively, you need to unlock it. You can do this on
 the command line with the `--unlock` option which takes a comma separated list of accounts
 (in hex or index) as argument so you can unlock the accounts programmatically for one
-session. This is useful if you want to use your account from Dapps via RPC. `--unlock `
+session. This is useful if you want to use your account from Dapps via RPC. `--unlock`
 will unlock the first account. This is useful when you created your account
 programmatically, you do not need to know the actual account to unlock it.
 
 Create account and start node with account unlocked:
+
 ```
-geth account new --password <(echo this is not secret!) 
-geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain localhost --verbosity 6 2>> geth.log 
+geth account new --password <(echo this is not secret!)
+geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain localhost --verbosity 6 2>> geth.log
 ```
 
 Instead of the account address, you can use integer indexes which refers to the address
@@ -353,12 +361,14 @@ is logged, so you may compromise your account. You have been warned.
 ### Checking account balances
 
 To check your the etherbase account balance:
+
 ```
 > web3.fromWei(eth.getBalance(eth.coinbase), "ether")
 6.5
 ```
 
 Print all balances with a JavaScript function:
+
 ```
 function checkAllBalances() {
     var totalBal = 0;
@@ -371,7 +381,9 @@ function checkAllBalances() {
     console.log("  Total balance: " + totalBal + " ether");
 };
 ```
+
 That can then be executed with:
+
 ```
 > checkAllBalances();
   eth.accounts[0]: 0xd1ade25ccd3d550a7eb532ac759cac7be09c2719 	balance: 63.11848 ether
@@ -405,9 +417,9 @@ from that account. Keyfiles are found in the keystore subdirectory of
 your Ledgerium node’s data directory. The default data directory
 locations are platform specific:
 
--   Windows: `%appdata%\Ledgerium\keystore`
--   Linux: `~/.Ledgerium/keystore`
--   Mac: `~/Library/Ledgerium/keystore`
+- Windows: `%appdata%\Ledgerium\keystore`
+- Linux: `~/.Ledgerium/keystore`
+- Mac: `~/Library/Ledgerium/keystore`
 
 To backup your keyfiles (accounts), copy either the individual
 keyfiles within the `keystore` subdirectory or copy the entire
@@ -420,7 +432,7 @@ To restore your keyfiles (accounts), copy the keyfiles back into the
 
 Importing an unencrypted private key is supported by `geth`
 
-``` 
+```
 geth account import /path/to/<keyfile
 ```
 
@@ -436,7 +448,7 @@ flag is not used, the new account will be created in the default data
 directory, i.e., the keyfile will be placed in the `keystore`
 subdirectory of the data directory.
 
-``` 
+```
 $ geth --datadir /someOtherEthDataDir  account import ./key.prv
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
@@ -448,7 +460,7 @@ Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
 For non-interactive use the passphrase can be specified with the
 `--password` flag:
 
-``` 
+```
 geth --password <passwordfileaccount import <keyfile
 ```
 
@@ -463,4 +475,3 @@ When you copy keys into an existing node's `keystore`, the order of
 accounts you are used to may change. Therefore you make sure you
 either do not rely on the account order or double-check and update
 the indexes used in your scripts.
-
