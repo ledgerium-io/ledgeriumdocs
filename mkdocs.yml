@@ -33,7 +33,7 @@ repo_url: https://github.com/ledgerium-io/ledgeriumdocs/
 nav:
   - Introduction:
       - Ledgerium Blockchain: ledgerium/introduction/ledgerium.md
-      - Ledgerium Foundation: ledgerium/introduction/the_ledgerium_foundation.md
+      - Ledgerium Foundation: ledgerium/introduction/ledgerium_foundation.md
   
   - Ledgerium Protocol:
       - Ledgerium Core: ledgerium/ledgeriumprotocol/ledgeriumcore.md
@@ -87,7 +87,6 @@ nav:
   - Ledgerium DApp Development:
       - DApp: ledgerium/ledgeriumdappdevelopment/decentralised_app_platform.md
       - Setup DApp Environment: ledgerium/ledgeriumdappdevelopment/setupenvironment.md
-      - Technology: ledgerium/ledgeriumdappdevelopment/technology.md
       - Solidity: ledgerium/ledgeriumdappdevelopment/solidity.md
       - Ledgerium API: ledgerium/ledgeriumdappdevelopment/json-rpc.md
       - Best Practices: ledgerium/ledgeriumdappdevelopment/bestpractices.md
