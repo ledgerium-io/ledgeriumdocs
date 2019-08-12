@@ -1,112 +1,45 @@
-Istanbul RPC API
-================
+# **Development Ecosystem**
 
-Istanbul Consensus
-------------------
+## **GoLang**
+Go, also known as Golang, is a statically typed, compiled programming language designed at Google. Go is syntactically similar to C, but with memory safety, garbage collection, structural typing,and CSP-style concurrency. [^1] Ledgerium Blockchain's Geth client is written in Golang.
 
-1.  Istanbul package provides ways of interacting with the consensus
-    mechanism, it allows new validators to be added and existing
-    validators to be removed
-2.  It allows managing the number of validators by a voting mechanism
-    which involves at least 2F+1 nodes
-3.  The details of active nodes can be found in the extra data of each
-    block that has been committed using the istanbul-tools. One can
-    decode the data in the following way
+## **Node.js**
+Node.js® is an open-source, cross-platform JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js executes JavaScript code outside of a browser. Node.js lets developers use JavaScript to write command line tools and for server-side scripting—running scripts server-side. Many of the software written and adopted by Ledgerium Blockchain is written in Node.js. [^2]
 
-istanbul extra decode --extradata "\<extradata\>"
+## **Solidity**
+Solidity is an object-oriented, high-level language for implementing smart contracts. Smart contracts are programs which govern the behaviour of accounts within the Ledgerium state. Solidity was influenced by C++, Python and JavaScript and is designed to target the Ethereum Virtual Machine (EVM). Solidity is statically typed, supports inheritance, libraries and complex user-defined types among other features.
 
-4.  This extra data contains one seal and 2F+1 committed seals, these
-    committed seals are omitted when the block hash is calculated
-5.  The committed seals maybe different in different blocks, but as this
-    is not included in the blockhash, the hash can be used to verify
-    across other nodes
+With Solidity you can create contracts for uses such as voting, crowdfunding, blind auctions, and multi-signature wallets. [^3]  Detailed working is available @ [Solidity](/docs/Ledgerium/LedgeriumDAppDevelopment/Solidity.md#Solidity.md) 
 
-istanbul.getSnapshot()
-----------------------
+## **LedgeriumWeb3.js**
+web3.js is a collection of libraries which allow you to interact with a local or remote ethereum node, using a HTTP or IPC connection. However, Ledgerium Blockchain uses XLG as its underlying currency equivalent to ether. In order to Ledgerium JavaScript API to work with XLG denomination, Web3JS library has to be extended to use with XXXX library. 
 
-This call shows the current state of the blockchain and gives the below
-structure as output .. code-block:: JSON { epoch: \<num\>, hash: "",
-number: , policy: 0, tally: { \<addr\>: { authorize: bool, votes: num }
-}, validators: [addr1,addr2..], votes: [{ address: addr, authorize:
-bool, block: num, validator: addr }] }
+The following documentation will guide you through installing and running web3.js, as well as providing a API reference documentation with examples. [^4]
+https://web3js.readthedocs.io/en/v1.2.0/
 
--   epoch : Indicates the number of blocks after which the proposal
-    which hasn't been resolved is cleared
--   hash : The current block hash at the given block number
--   tally : The object maintaining the current state of votes of all the
-    validators
--   validators : The list of all the addresses which can act as
-    validators
--   votes : The individual votes casted by validators as an array
--   authorize : true - proposal to add as a validator, false - proposal
-    to remove as a validator
+## **ledethjs-unit.js**
+A simple module for handling Ledgerium units. LedgeriumWeb3.js uses this library to deal with Ledgerium Blockchain units.  [^5]
 
-istanbul.propose()
-------------------
+## **Truffle**
+Truffle is a development environment, testing framework and asset pipeline for Ethereum & Ledgerium, aiming to make life as an Ledgerium developer easier. With Truffle, developer get
+- Built-in smart contract compilation, linking, deployment and binary management. [^6]
+- Automated contract testing with Mocha and Chai.
+- Configurable build pipeline with support for custom build processes.
+- Scriptable deployment & migrations framework.
+- Network management for deploying to many public & private networks.
+- Interactive console for direct contract communication.
+- Instant rebuilding of assets during development.
+- External script runner that executes scripts within a Truffle environment.
 
-This method is used to start voting/vote for an existing proposal; to
-add or remove a validator takes as argument the coinbase of the node and
-a bool value indicating if the validator is to be added or removed.
+## **Remix**
+Remix is a powerful, open source tool that helps you write Solidity contracts straight from the browser. Written in JavaScript, Remix supports both usage in the browser and locally.
+Remix also supports testing, debugging and deploying of smart contracts and much more. [^7]
 
-istanbul.getSnapshotAtHash()
-----------------------------
-
-Used to get the current state of the voting and active validators as of
-a particular block hash, takes as argument a block hash
-
-istanbul.getCandidates(callback)
---------------------------------
-
-Gives all the addresses with the respective votes casted by that
-particular node as a error first callback
-
-istanbul.getValidators()
-------------------------
-
-Returns the list of active validators who can commit a block
-
-Every block header contains the following fields
-
-``` {.sourceCode .JSON}
-```
-
-> block = { difficulty: 1, extraData: "", gasLimit: , gasUsed: 0,
-> logsBloom: , mixHash: , nonce: "0x0000000000000000", number: 12220,
-> parentHash: "", receiptsRoot: "", sha3Uncles: "", stateRoot: "",
-> timestamp: , transactionsRoot: "" }
-
-The extra data doesn’t include the committed seals as these can vary
-from block to block, so the only extra data is the rlpHash of the
-validators and seal. When a block is sealed the block seal is computed
-as ECDSA(rlpHash(Block\_Header), private\_key)
-
-Istanbul Working
-----------------
-
-1.  For a new block to be committed the validators pick a new node as
-    proposer which will be responsible to create a new block.
-2.  This is broadcasted to all the validators along with the pre-prepare
-    message, making all the node's change their state to pre-prepared
-3.  These validators now publish a prepare message
-4.  Upon receiving 2F+1 pre-prepare messages from the validators the
-    proposer nodes prepares for the commit of the block
-5.  The new block will comprise of all the transactions submitted to
-    that particular node, from all the transactions the block headers
-    will be calculated
-6.  **The RLP hash of all the block header will give the resultant block
-    hash, when published this block hash will be signed using the node's
-    private key**
-7.  **This signature signifies the seal of the block, which signifies
-    that the block hash been sealed into the blockchain by a particular
-    proposer.**
-8.  And once this block has been pushed a commit message is sent along
-    with the block details
-9.  Each validator along with the proposer waits for 2F+1 commit
-    messages from other blocks
-10. **Each node appends it's own signature to the extra data of this
-    block, this is the committed seal field in the extra data**
-11. Once each block has 2F+1 committed seals all the validators publish
-    a new-round message
-12. The same process repeats once a new validator is chosen as a new
-    block proposer
-
+## **References**
+[^1]: [Golang](https://en.wikipedia.org/wiki/Go_(programming_language) "GoLang")  
+[^2]: [Node.js](https://en.wikipedia.org/wiki/Node.js "Node.js")  
+[^3]: [Solidity](https://solidity.readthedocs.io "Solidity")  
+[^4]: [Web3.js](https://web3js.readthedocs.io "Web3.js")  
+[^5]: [ledethjs-unit.js](https://github.com/ledgerium-io/ledethjs-unit "ledethjs-unit.js")  
+[^6]: [Truffle](https://www.npmjs.com/package/truffle "Truffle")  
+[^7]: [Remix](https://remix.readthedocs.io "Remix")  

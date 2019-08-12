@@ -33,9 +33,9 @@ repo_url: https://github.com/ledgerium-io/ledgeriumdocs/
 nav:
   - Introduction:
       - Ledgerium Blockchain: ledgerium/introduction/ledgerium.md
-      - Ledgerium Foundation: ledgerium/introduction/the_ledgerium_foundation.md
-      - Architecture Overview - TBC
-      - What is XLG: ledgerium/ledgeriumprotocol/xlg.md
+      - Ledgerium Foundation: ledgerium/introduction/ledgerium_foundation.md
+      - Architecture Overview: ledgerium/introduction/architecture.md
+      - What is XLG: ledgerium/introduction/xlg.md
       - Ledgerium Setup:
           - Getting Started: ledgerium/ledgeriumbox/gettingstarted.md
           - Test Network: ledgerium/ledgeriumsetup/test_networks.md
@@ -88,9 +88,8 @@ nav:
   - Ledgerium DApp Development:
       - DApp: ledgerium/ledgeriumdappdevelopment/decentralised_app_platform.md
       - Setup DApp Environment: ledgerium/ledgeriumdappdevelopment/setupenvironment.md
-      - Technology: ledgerium/ledgeriumdappdevelopment/technology.md
       - Solidity: ledgerium/ledgeriumdappdevelopment/solidity.md
-      - Ledgerium API: ledgerium/ledgeriumdappdevelopment/json-rpc.md
+      - JSON RPC API: ledgerium/ledgeriumdappdevelopment/json-rpc.md
       - Best Practices: ledgerium/ledgeriumdappdevelopment/bestpractices.md
 
   - Ledgerium Gas Station:
