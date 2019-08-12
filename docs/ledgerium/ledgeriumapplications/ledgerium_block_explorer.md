@@ -1,4 +1,3 @@
-Ledgerium Block Explorer
-========================
+# Ledgerium Block Explorer
 
 Not yet complete

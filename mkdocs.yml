@@ -20,7 +20,7 @@
 
 # Project information
 site_name: Ledgerium Blockchain
-site_description: Open public implementation of Quorum Blockchain supporting public and privacy transactions.
+site_description: Open public implementation of Quorum Blockchain supporting public and private transactions.
 site_author: The Blockledger Pty Ltd.
 site_url: https://docs.ledgerium.io
 copyright: "Copyright &copy; 2019 The BlockLedger Pty Ltd"
@@ -34,16 +34,9 @@ nav:
   - Introduction:
       - Ledgerium Blockchain: ledgerium/introduction/ledgerium.md
       - Ledgerium Foundation: ledgerium/introduction/ledgerium_foundation.md
-      - Architecture Overview: ledgerium/introduction/architecture.md
+      - Overview diagram: ledgerium/introduction/architecture.md
       - What is XLG: ledgerium/introduction/xlg.md
-      - Ledgerium Setup:
-          - Getting Started: ledgerium/ledgeriumbox/gettingstarted.md
-          - Test Network: ledgerium/ledgeriumsetup/test_networks.md
-          - Setup Masternode: ledgerium/ledgeriumsetup/ledgerium_masternode.md
-          - Governance: ledgerium/ledgeriumsetup/ledgerium_governance.md
-          - Peer permissioning: ledgerium/ledgeriumsetup/peer_permissioning_governance.md
-          - XLG Reward: ledgerium/ledgeriumsetup/xlg_reward.md
-          - Faucet: ledgerium/ledgerium_faucet.md
+      - Quick start steps
 
   - Ledgerium Protocol:
       - Ledgerium Core: ledgerium/ledgeriumprotocol/ledgeriumcore.md
@@ -74,6 +67,15 @@ nav:
                   - Monitoring: ledgerium/ledgeriumprotocol/quorum/tessera/Usage/Monitoring.md
       - IBFT Consensus: ledgerium/ledgeriumprotocol/ibft_consensus.md
       - Network Permissioning: ledgerium/ledgeriumprotocol/network_permissioning.md
+
+  - Ledgerium Setup:
+      - Getting Started: ledgerium/ledgeriumbox/gettingstarted.md
+      - Test Network: ledgerium/ledgeriumsetup/test_networks.md
+      - Setup Masternode: ledgerium/ledgeriumsetup/ledgerium_masternode.md
+      - Governance: ledgerium/ledgeriumsetup/ledgerium_governance.md
+      - Peer permissioning: ledgerium/ledgeriumsetup/peer_permissioning_governance.md
+      - XLG Reward: ledgerium/ledgeriumsetup/xlg_reward.md
+      - Faucet: ledgerium/ledgerium_faucet.md
 
   - Ledgerium Applications:
       - Ledgerium BlockExplorer: ledgerium/ledgeriumapplications/ledgerium_block_explorer.md
