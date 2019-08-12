@@ -35,7 +35,7 @@ Ledgerium Blockchain draws inspiration from J.P. Morgan's Quorum Protocol. The p
 
 Under Istanbul Byzantine Fault Tolerance (IBFT) consensus, a specified number of high performing nodes are selected by the blockchain as a valdiator master node, achieving high throughput by keeping the transactions per second (TPS) of the entire blockchain on an acceptable level. Ledgerium Blockchain's robust consensus mechanism enabled it to improve both Bitcoin and Ethereum 1.0 in terms of TPS.
 
-High TPS guarantees low calculation delay, which allows transaction speeds to compete with existing payment systems such as VISA and SWIFT. This makes everyday purchases with TRX a convenient possibility.
+High TPS guarantees low calculation delay, which allows transaction speeds to compete with existing payment systems such as VISA and SWIFT. This makes everyday purchases with XLG a convenient possibility.
 
 ### **Scalability**
 

@@ -60,66 +60,59 @@ See the section backup-and-restore-accounts for more information.
 
 2. We understand that your new account will not contain any Ether currency. But you can be absolutely certain that without your key and your password, nobody else can ever access it.
 
-<<<<<<< HEAD
-
 3. It is safe to transfer the entire directory or any individual keyfile between Ledgerium nodes.
 
-4. # Adher to order of accounts: In case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you don't change the index in your scripts or code snippets.
-   !!! warning
-   Note that in case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
+4. Adher to order of accounts: In case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you don't change the index in your scripts or code snippets.
 
-!!! warning
-Remember your password.
+5. Remember your password: Please keep a back-up of your password. In case you lose it you can reset it with a seed string and your private key.
 
-5. Remember your password: There is no way to reset your password, once it has been encryted and you lose it. There won't be any other chance to restore password. Please keep a back-up at a safe
+### Manage Account
 
 The ethereum CLI `geth` provides account management via the `account` command:
 
 ```
-> geth account <command> [options...] [arguments...]
-```
+ geth account <command> [options...] [arguments...]
 
-Manage accounts lets you create new accounts, list all existing accounts, import a private key into a new account, migrate to newest key format and change your password.
-
-It supports interactive mode, when you are prompted for password as well as non-interactive mode where passwords are supplied via a given password file. Non-interactive mode is only meant for scripted use on test networks or known safe environments.
-
-Make sure you remember the password you gave when creating a new account (with new, update or import). Without it you are not able to unlock your account.
-
-Note that exporting your key in unencrypted format is NOT supported.
-
-Keys are stored under `<DATADIR>/keystore`. Make sure you backup your keys regularly! See [DATADIR backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore)
-for more information. If a custom datadir and keystore option are given the keystore option takes preference over the datadir option.
-
-The newest format of the keyfiles is: `UTC--<created_at UTC ISO8601>-<address hex>`. The order of accounts when listing, is lexicographic, but as a consequence of the timespamp
-format, it is actually order of creation
-
-It is safe to transfer the entire directory or the individual keys therein between ethereum nodes. Note that in case you are adding keys to your node from a different node,
-the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
-
-And again. **DO NOT FORGET YOUR PASSWORD**
+Accounts can also be managed via the [Javascript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
 
 ```
-COMMANDS:
+
+**_Features_**
+
+- Allows you to create new accounts
+- Shows a list of all existing accounts
+- Import a private key into a new account
+- Supports interactive mode, when you are prompted for password as well as non-interactive mode where passwords are supplied via given password file. Non-interactive mode is only meant for scripted use on test networks or known safe environments.
+
+`Note that exporting your key in unencrypted format is NOT supported.`
+
+**\_Key storage**
+
+- Keys are stored under `<DATADIR>/keystore`.
+- Make sure you backup your keys regularly! Please see [DATADIR backup & restore](https://github.com/ethereum/go-ethereum/wiki/Backup-&-restore) for more information.
+- If a custom datadir and keystore option are mentioned, then the keystore option takes preference over the datadir option.
+
+The newest format of the keyfiles is: `UTC--<created_at UTC ISO8601>-<address hex>`. The order of accounts when listing, is lexicographic, but as a consequence of the timestamp
+format, it is based as per the actual order of creation.
+
+It is safe to transfer the entire directory or the individual keys therein between ethereum nodes.
+
+> Note that in case you are adding keys to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
+
+**Commands**
+
+```
      list    Print summary of existing accounts
      new     Create a new account
      update  Update an existing account
      import  Import a private key into a new account
+     list --help options
+     geth account list --help  Subcommands information
 ```
-
-You can get info about subcommands by `geth account <command> --help`.
-
-```
-> geth account list --help
-list [command options] [arguments...]
-
-Print a short summary of all accounts
 
 OPTIONS:
-  --datadir "/home/bas/.ethereum"  Data directory for the databases and keystore
-  --keystore                       Directory for the keystore (default = inside the datadir)
-```
-
-Accounts can also be managed via the [Javascript Console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console)
+--datadir "/home/bas/.ethereum" Data directory for the databases and keystore
+--keystore Directory for the keystore (default = inside the datadir)
 
 ## **Examples**
 
@@ -128,45 +121,52 @@ Accounts can also be managed via the [Javascript Console](https://github.com/eth
 #### **Creating an account**
 
 ```
+
 > geth account new
-Your new account is locked with a password. Please give a password. Do not forget this password.
-Passphrase:
-Repeat Passphrase:
-Address: {168bc315a2ee09042d83d7c5811b533620531f67}
+> Your new account is locked with a password. Please give a password. Do not forget this password.
+> Passphrase:
+> Repeat Passphrase:
+> Address: {168bc315a2ee09042d83d7c5811b533620531f67}
+
 ```
 
 #### **Listing accounts in a custom keystore directory**
 
 ```
+
 > geth account list --keystore /tmp/mykeystore/
-Account #0: {5afdd78bdacb56ab1dad28741ea2a0e47fe41331} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-27.437847599Z--5afdd78bdacb56ab1dad28741ea2a0e47fe41331
-Account #1: {9acb9ff906641a434803efb474c96a837756287f} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-52.180688336Z--9acb9ff906641a434803efb474c96a837756287f
+> Account #0: {5afdd78bdacb56ab1dad28741ea2a0e47fe41331} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-27.437847599Z--5afdd78bdacb56ab1dad28741ea2a0e47fe41331
+> Account #1: {9acb9ff906641a434803efb474c96a837756287f} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-52.180688336Z--9acb9ff906641a434803efb474c96a837756287f
 
 ```
 
 #### **Import private key into a node with a custom datadir**
 
 ```
+
 > geth account import --datadir /someOtherEthDataDir ./key.prv
-The new account will be encrypted with a passphrase.
-Please enter a passphrase now.
-Passphrase:
-Repeat Passphrase:
-Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+> The new account will be encrypted with a passphrase.
+> Please enter a passphrase now.
+> Passphrase:
+> Repeat Passphrase:
+> Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+
 ```
 
 #### Account update
 
 ```
+
 > geth account update a94f5374fce5edbc8e2a8697c15331677e6ebf0b
-Unlocking account a94f5374fce5edbc8e2a8697c15331677e6ebf0b | Attempt 1/3
-Passphrase:
-0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
-Account 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b' unlocked.
-Please give a new password. Do not forget this password.
-Passphrase:
-Repeat Passphrase:
-0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
+> Unlocking account a94f5374fce5edbc8e2a8697c15331677e6ebf0b | Attempt 1/3
+> Passphrase:
+> 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
+> Account 'a94f5374fce5edbc8e2a8697c15331677e6ebf0b' unlocked.
+> Please give a new password. Do not forget this password.
+> Passphrase:
+> Repeat Passphrase:
+> 0xa94f5374fce5edbc8e2a8697c15331677e6ebf0b
+
 ```
 
 ### Non-interactive use
@@ -178,9 +178,9 @@ file consists of the raw characters of the password, followed by a single newlin
 Supplying the password directly as part of the command line is not recommended, but you can always use shell trickery to get round this restriction.
 
 ```
-> geth account new --password /path/to/password
+geth account new --password /path/to/password
 
-> geth account import  --datadir /someOtherEthDataDir --password /path/to/anotherpassword ./key.prv
+geth account import --datadir /someOtherEthDataDir --password /path/to/anotherpassword ./key.prv
 ```
 
 # **Creating accounts**
@@ -188,9 +188,10 @@ Supplying the password directly as part of the command line is not recommended, 
 ## **Creating a new account**
 
 ```
+
 > geth account new
 > geth account new --password /path/to/passwdfile
-> geth account new --password <(echo $mypassword)
+> geth account new --password <(echo \$mypassword)
 
 ```
 
@@ -199,8 +200,9 @@ Creates a new account and prints the address.
 On the console, use:
 
 ```
+
 > personal.NewAccount()
-... you will be prompted for a password ...
+> ... you will be prompted for a password ...
 
 or
 
@@ -214,7 +216,9 @@ your account in the future.
 For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
+
 geth account new --password <passwordfile>
+
 ```
 
 Note, this is meant to be used for testing only, it is a bad idea to save your
@@ -223,7 +227,9 @@ password to file or expose in any other way.
 ## **Creating an account by importing a private key**
 
 ```
+
     geth account import <keyfile>
+
 ```
 
 Imports an unencrypted private key from `<keyfile>` and creates a new account and prints the address.
@@ -237,7 +243,9 @@ You must remember this passphrase to unlock your account in the future.
 For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
+
 geth account import --password <passwordfile> <keyfile>
+
 ```
 
 !!! note
@@ -250,10 +258,13 @@ When you copy keys into an existing node's keystore, the order of accounts you a
 If you use the password flag with a password file, best to make sure the file is not readable or even listable for anyone but you. You achieve this with:
 
 ```
+
 touch /path/to/password
 chmod 700 /path/to/password
 cat > /path/to/password
->I type my pass here^D
+
+> I type my pass here^D
+
 ```
 
 ## **Updating an existing account**
@@ -261,8 +272,10 @@ cat > /path/to/password
 You can update an existing account on the command line with the `update` subcommand with the account address or index as parameter. You can specify multiple accounts at once.
 
 ```
+
 geth account update 5afdd78bdacb56ab1dad28741ea2a0e47fe41331 9acb9ff906641a434803efb474c96a837756287f
 geth account update 0 1 2
+
 ```
 
 The account is saved in the newest version in encrypted format, you are prompted for a passphrase to unlock the account and another to save the updated file.
@@ -276,7 +289,9 @@ After a successful update, all previous formats/versions of that same key are re
 Importing your presale wallet is very easy. If you remember your password that is:
 
 ```
+
 geth wallet import /path/to/my/presale.wallet
+
 ```
 
 will prompt for your password and imports your ether presale account. It can be used non-interactively with the --password option taking a passwordfile as argument containing
@@ -289,9 +304,11 @@ the wallet password in cleartext.
 From the command line, call the CLI with:
 
 ```
+
 > geth account list
-Account #0: {5afdd78bdacb56ab1dad28741ea2a0e47fe41331} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-27.437847599Z--5afdd78bdacb56ab1dad28741ea2a0e47fe41331
-Account #1: {9acb9ff906641a434803efb474c96a837756287f} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-52.180688336Z--9acb9ff906641a434803efb474c96a837756287f
+> Account #0: {5afdd78bdacb56ab1dad28741ea2a0e47fe41331} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-27.437847599Z--5afdd78bdacb56ab1dad28741ea2a0e47fe41331
+> Account #1: {9acb9ff906641a434803efb474c96a837756287f} keystore:///tmp/mykeystore/UTC--2017-04-28T08-46-52.180688336Z--9acb9ff906641a434803efb474c96a837756287f
+
 ```
 
 to list your accounts in order of creation.
@@ -302,22 +319,28 @@ This order can change if you copy keyfiles from other nodes, so make sure you ei
 When using the console:
 
 ```
+
 > eth.accounts
-["0x5afdd78bdacb56ab1dad28741ea2a0e47fe41331", "0x9acb9ff906641a434803efb474c96a837756287f"]
+> ["0x5afdd78bdacb56ab1dad28741ea2a0e47fe41331", "0x9acb9ff906641a434803efb474c96a837756287f"]
+
 ```
 
 or via RPC:
 
 ```
+
 # Request
+
 > curl -X POST --data '{"jsonrpc":"2.0","method":"eth_accounts","params":[],"id":1} http://127.0.0.1:8545'
 
 # Result
+
 {
-  "id":1,
-  "jsonrpc": "2.0",
-  "result": ["0x5afdd78bdacb56ab1dad28741ea2a0e47fe41331", "0x9acb9ff906641a434803efb474c96a837756287f"]
+"id":1,
+"jsonrpc": "2.0",
+"result": ["0x5afdd78bdacb56ab1dad28741ea2a0e47fe41331", "0x9acb9ff906641a434803efb474c96a837756287f"]
 }
+
 ```
 
 If you want to use an account non-interactively, you need to unlock it. You can do this on the command line with the `--unlock` option which takes a comma separated list of accounts
@@ -327,8 +350,10 @@ will unlock the first account. This is useful when you created your account prog
 Create account and start node with account unlocked:
 
 ```
+
 geth account new --password <(echo this is not secret!)
 geth --password <(echo this is not secret!) --unlock primary --rpccorsdomain localhost --verbosity 6 2>> geth.log
+
 ```
 
 Instead of the account address, you can use integer indexes which refers to the address position in the account listing (and corresponds to order of creation)
@@ -336,7 +361,9 @@ Instead of the account address, you can use integer indexes which refers to the 
 The command line allows you to unlock multiple accounts. In this case the argument to unlock is a comma delimited list of accounts addresses or indexes.
 
 ```
+
 geth --unlock "0x407d73d8a49eeb85d32cf465507dd71d507100c1,0,5,e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32"
+
 ```
 
 If this construction is used non-interactively, your password file will need to contain the respective passwords for the accounts in question, one per line.
@@ -344,7 +371,9 @@ If this construction is used non-interactively, your password file will need to 
 On the console you can also unlock accounts (one at a time) for a duration (in seconds).
 
 ```
+
 personal.unlockAccount(address, "password", 300)
+
 ```
 
 Note that we do NOT recommend using the password argument here, since the console history is logged, so you may compromise your account. You have been warned.
@@ -354,33 +383,39 @@ Note that we do NOT recommend using the password argument here, since the consol
 To check your the coinbase account balance:
 
 ```
+
 > web3.fromWei(eth.getBalance(eth.coinbase), "xlg")
-6.5
+> 6.5
+
 ```
 
 Print all balances with a JavaScript function:
 
 ```
+
 function checkAllBalances() {
-    var totalBal = 0;
-    for (var acctNum in eth.accounts) {
-        var acct = eth.accounts[acctNum];
-        var acctBal = web3.fromWei(eth.getBalance(acct), "xlg");
-        totalBal += parseFloat(acctBal);
-        console.log("  eth.accounts[" + acctNum + "]: \t" + acct + " \tbalance: " + acctBal + " xlg");
-    }
-    console.log("  Total balance: " + totalBal + " xlg");
+var totalBal = 0;
+for (var acctNum in eth.accounts) {
+var acct = eth.accounts[acctNum];
+var acctBal = web3.fromWei(eth.getBalance(acct), "xlg");
+totalBal += parseFloat(acctBal);
+console.log(" eth.accounts[" + acctNum + "]: \t" + acct + " \tbalance: " + acctBal + " xlg");
+}
+console.log(" Total balance: " + totalBal + " xlg");
 };
+
 ```
 
 That can then be executed with:
 
 ```
+
 > checkAllBalances();
-  eth.accounts[0]: 0xd1ade25ccd3d550a7eb532ac759cac7be09c2719 	balance: 63.11848 xlg
-  eth.accounts[1]: 0xda65665fc30803cb1fb7e6d86691e20b1826dee0 	balance: 0 xlg
-  eth.accounts[2]: 0xe470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32 	balance: 1 xlg
-  eth.accounts[3]: 0xf4dd5c3794f1fd0cdc0327a83aa472609c806e99 	balance: 6 xlg
+> eth.accounts[0]: 0xd1ade25ccd3d550a7eb532ac759cac7be09c2719 balance: 63.11848 xlg
+> eth.accounts[1]: 0xda65665fc30803cb1fb7e6d86691e20b1826dee0 balance: 0 xlg
+> eth.accounts[2]: 0xe470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32 balance: 1 xlg
+> eth.accounts[3]: 0xf4dd5c3794f1fd0cdc0327a83aa472609c806e99 balance: 6 xlg
+
 ```
 
 Since this function will disappear after restarting geth, it can be helpful to store commonly used functions to be recalled later. The [loadScript](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console#loadscript) function makes this very easy.
@@ -389,8 +424,10 @@ First, save the `checkAllBalances()` function definition to a file on your compu
 example, `/Users/username/gethload.js`. Then load the file from the interactive console:
 
 ```
+
 > loadScript("/Users/username/gethload.js")
-true
+> true
+
 ```
 
 The file will modify your JavaScript environment as if you has typed the commands
@@ -416,7 +453,9 @@ To restore your keyfiles (accounts), copy the keyfiles back into the `keystore` 
 Importing an unencrypted private key is supported by `geth`
 
 ```
+
 geth account import /path/to/<keyfile
+
 ```
 
 This command imports an unencrypted private key from the plain text file `<keyfile` and creates a new account and prints the address. The keyfile is assumed to contain an unencrypted private key as canonical EC raw bytes encoded into hex. The account is saved in encrypted format, you are prompted for a passphrase. You must remember this passphrase to unlock your account in the future.
@@ -424,18 +463,22 @@ This command imports an unencrypted private key from the plain text file `<keyfi
 An example where the data directory is specified. If the `--datadir` flag is not used, the new account will be created in the default data directory, i.e., the keyfile will be placed in the `keystore` subdirectory of the data directory.
 
 ```
-$ geth --datadir /someOtherEthDataDir  account import ./key.prv
+
+\$ geth --datadir /someOtherEthDataDir account import ./key.prv
 The new account will be encrypted with a passphrase.
 Please enter a passphrase now.
 Passphrase:
 Repeat Passphrase:
 Address: {7f444580bfef4b9bc7e14eb7fb2a029336b07c9d}
+
 ```
 
 For non-interactive use the passphrase can be specified with the `--password` flag:
 
 ```
+
 geth --password <passwordfileaccount import <keyfile
+
 ```
 
 !!! note
@@ -443,3 +486,7 @@ Since you can directly copy your encrypted accounts to another Ledgerium instanc
 
 !!! warning
 When you copy keys into an existing node's `keystore`, the order of accounts you are used to may change. Therefore you make sure you either do not rely on the account order or double-check and update the indexes used in your scripts.
+
+```
+
+```
