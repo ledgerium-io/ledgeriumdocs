@@ -35,37 +35,37 @@ This execution needs to be completely deterministic, its only context is the pos
 
 All XLG balances and values are denominated in units of wei `1 XLG is 1e18 wei`.
 
-> **Please note**  
+**Please note**
+
 > "Contracts" in Ledgerium should not be seen as mandatory, rather, they are more like "autonomous agents" that are part of Ledgerium execution environment. Contracts are always executing a specific piece of code when "poked" by a message or transaction and have direct control over their own XLG balance and key/value store to maintain their permanent state.
 
 ## **Key Files**
 
-Every account is accessed by its credentials: private key and public key. Accounts are indexed as per their _address_ derived from the public key made-up of the last 20 bytes. Every private key/address pair is encoded in a _keyfile_.
+Every account is accessed by its credentials: private key and public key. Accounts are indexed as per their _address_ derived from the public key created from the last 20 bytes.
 
 Keyfiles are JSON text files which can be viewed in any text editor. The critical component of the keyfile, account’s private key, is always encrypted, and it is encrypted with the password you enter when you create the account.
 
 Keyfiles are found in the `keystore` subdirectory of your Ledgerium node’s data directory. Make sure you backup your keyfiles regularly!
 See the section backup-and-restore-accounts for more information.
 
-Creating a key is tantamount to creating an account.
+### Creating an Account
 
-- You don't need to tell anybody else you're doing it
-- You don't need to synchronize with the blockchain
-- You don't need to run a client
-- You don't even need to be connected to the internet
+**`Things to note`**
 
-Of course your new account will not contain any Ether. But it'll be yours and you can be certain that without your key and your password, nobody else can ever access it.
+1. Creating a key is same as creating an account.
 
-It is safe to transfer the entire directory or any individual keyfile between Ledgerium nodes.
+   - You don't need to tell anybody else you're doing it
+   - You don't need to synchronize with the blockchain
+   - You don't need to run a client
+   - You don't even need to be connected to the internet
 
-!!! warning
-Note that in case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you do not rely or change the index in your scripts or code snippets.
+2. We understand that your new account will not contain any Ether currency. But you can be absolutely certain that without your key and your password, nobody else can ever access it.
 
-!!! warning
-Remember your password.
+3. It is safe to transfer the entire directory or any individual keyfile between Ledgerium nodes.
 
-If you lose the password you use to encrypt your account, you will not be able to access that account.
-Repeat: It is NOT possible to access your account without a password and there is no _forgot my password_ option here. Do not forget it.
+4. Adher to order of accounts: In case you are adding keyfiles to your node from a different node, the order of accounts may change. So make sure you don't change the index in your scripts or code snippets.
+
+5. Remember your password: There is no way to reset your password, once it has been encryted and you lose it. There won't be any other chance to restore password. Please keep a back-up at a safe
 
 The ethereum CLI `geth` provides account management via the `account` command:
 
